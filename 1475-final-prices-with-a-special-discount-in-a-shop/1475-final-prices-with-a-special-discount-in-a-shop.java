@@ -1,0 +1,26 @@
+import java.util.*;
+
+class Solution {
+    public int[] finalPrices(int[] prices) {
+
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < prices.length; i++) {
+
+            // Current price can be the discount
+            // for all previous prices >= current price
+            while (!stack.isEmpty()
+                    && prices[stack.peek()] >= prices[i]) {
+
+                int index = stack.pop();
+
+                prices[index] -= prices[i];
+            }
+
+            // Store current index
+            stack.push(i);
+        }
+
+        return prices;
+    }
+}
